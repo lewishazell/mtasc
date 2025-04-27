@@ -1,0 +1,45 @@
+name: build
+
+on:
+  release:
+    types: [ "created" ]
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Read VERSION
+        run: echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
+
+      - name: Install prerequisites
+        run: sudo apt update -y && sudo apt -y install gcc-9 ruby wget libpcre3 zlib1g-dev opam git
+      
+      - name: Install rake
+        run: sudo gem install rake
+
+      - name: Setup ocaml
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 3.12.1
+
+      - name: Install ocamlfind
+        run: opam install -y ocamlfind
+
+      - name: Compile mtasc
+        run: eval $(opam env) && rake compile
+
+      - name: Archive binary and SDK
+        run: tar -czf mtasc-$VERSION.tar.gz LICENSE -C bin mtasc -C ../src/mtasc std std8 std9
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: mtasc-${{ env.VERSION }}.tar.gz
+          asset_name: mtasc-${{ env.VERSION }}.tar.gz
+          asset_content_type: application/octet-stream
