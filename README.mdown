@@ -1,6 +1,5 @@
-## Original README
-
-This is a fork of MTASC. The original version was built and maintained by Motion-Twin, but it is no longer updated due to Motion-Twin's new focus on haXe (http://haxe.org). The homepage for this fork is:
+# Introduction
+This is a fork of the MTASC ActionScript 2 compiler. The original version was built and maintained by Motion-Twin, but it is no longer updated due to Motion-Twin's new focus on haXe (http://haxe.org). The homepage for this fork is:
 
 <https://sourceforge.net/projects/mtasc/>
 
@@ -12,16 +11,13 @@ MTASC is Licensed under the GNU General Public License (GPL) The compiler source
 
 The GPL license does NOT imply that you source code will  have to be GPL or Open Source. You can use MTASC in order to compiler any source code without restrictions. Only if you want use the compiler as part of your application you'll have to apply the GPL rules.
 
-## Notes to my (bomberstudios) fork
+## Notes on this fork
+This is derived from the bomberstudios fork which adds useful build automation. As bitrot on the compiler source has set in, making it difficult to build on many modern Linux distributions, this fork adds a build pipeline to make this software usable.
 
-This is a personal fork, not intended for production use. Its only aim is to be easy to compile on my platform of choice (Mac OS X)
-
-## Contributors
-
+# Contributors
 - Tristan Schmelcher <tschmelcher@google.com> - no32klimit Patch
 - Ale Muñoz <bomberstudios@gmail.com> - Mac binary
+- Lewis Hazell <git@hazell.dev> - build pipelines
 
-
-## Install
-
+# Install
 See [INSTALL.mdown](https://github.com/bomberstudios/mtasc/blob/master/INSTALL.mdown)
